@@ -2,18 +2,25 @@ package cl.desafiolatam.asynccoroutines
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.provider.ContactsContract.CommonDataKinds.Website.URL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.net.URL
 
 class Repository {
-    suspend fun downloadFromNetwork(url: String): result<Bitmap> = withContext(Dispatchers.IO){
-        val urldisplay =url
-        var bmp: Bitmap? = null
-            val inputStream = URL(urldisplay).openStream()
+
+    sealed class Result<out R>{
+        data class Success<out T>(val data: T) : Result<T>()
+        data class Error(val exception: Exception) : Result<Nothing>()
+    }
+    suspend fun downloadFromNetwork(url: String): Result<Bitmap> = withContext(Dispatchers.IO){
+        try {
+            var bmp: Bitmap?
+            val inputStream = URL(url).openStream()
             bmp = BitmapFactory.decodeStream(inputStream)
-
-
+            Result.Success(bmp)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Result.Error(e)
         }
+    }
 }
