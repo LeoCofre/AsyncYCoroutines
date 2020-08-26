@@ -17,10 +17,11 @@ class MyViewModel: ViewModel() {
     private val image= MutableLiveData<Bitmap> ()
     val error: MutableLiveData<Boolean> =  MutableLiveData()
 
-    val listaUrl: MutableList<String> = mutableListOf("https://clinic-cloud.com/wp-content/uploads/2017/12/nasa-y-medicina-800x450.jpg"
-        , "https://www.rockandpop.cl/wp-content/uploads/2018/11/nasa-y-esa-colaboraran-para-traer-muestras-de-mart-815649-jpg_604x0-400x340.jpg"
-        , "https://www.rosarioplus.com/export/sites/rosarioplus/img/2017/08/03/nasa.jpg_1169487972.jpg"
-        , "https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/EE7TNMYGXJGJXPBGVY7PMJZLWI.jpg")
+    val listaUrl: MutableList<String> = mutableListOf(
+        "https://www.rockandpop.cl/wp-content/uploads/2018/11/nasa-y-esa-colaboraran-para-traer-muestras-de-mart-815649-jpg_604x0-400x340.jpg"
+        , "https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/EE7TNMYGXJGJXPBGVY7PMJZLWI.jpg"
+        ,"https://clinic-cloud.com/wp-content/uploads/2017/12/nasa-y-medicina-800x450.jpg"
+        , "https://www.rosarioplus.com/export/sites/rosarioplus/img/2017/08/03/nasa.jpg_1169487972.jpg")
 
     fun loadImage(): LiveData<Bitmap> {
         viewModelScope.launch {
